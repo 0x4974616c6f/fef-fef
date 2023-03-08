@@ -11,6 +11,7 @@ const isAuthenticated = require("./middlewares/isAuthenticated");
 const AuthUserController = require("./controllers/user/AuthUserController");
 const CreateUserController = require("./controllers/user/CreateUserController");
 const DetailUserController = require("./controllers/user/DetailUserController");
+const IsAdminController = require("./controllers/user/IsAdminController");
 
 const CreateTaskController = require("./controllers/tasks/CreateTaskController");
 const DeleteTaskController = require("./controllers/tasks/DeleteTaskController");
@@ -29,6 +30,7 @@ const {
 
 const router = express.Router();
 
+router.get('/admin', limiter, isAuthenticated, IsAdminController.index);
 router.post("/users", limiter, CreateUserController.create);
 router.post("/session", limiter, AuthUserController.auth);
 router.get(
@@ -113,4 +115,4 @@ router.delete(
   employee_delete
 );
 
-module.exports = router;
+module.exports = {routerRecursosHumanos: router, limiter};

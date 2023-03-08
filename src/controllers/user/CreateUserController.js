@@ -8,6 +8,7 @@ module.exports = {
     await body("name").notEmpty().run(req);
     await body("email").notEmpty().isEmail().run(req);
     await body("password").notEmpty().isStrongPassword().run(req);
+    
 
     // Pelo menos 8 caracteres de comprimento
     // Pelo menos 1 letra maiúscula

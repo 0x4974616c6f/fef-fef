@@ -143,10 +143,12 @@ module.exports = {
 
     let photo = req.body.photo;
 
+    // console.log(photo)
+
     try {
       const userUpdate = await Employees.findOne({ _id: id });
 
-      if (photo) {
+      if (photo.startsWith("data:image/jpeg;base64")) {
         if (userUpdate.photo) {
           const path = `./${userUpdate.photo}`;
           fs.unlinkSync(path);
@@ -167,6 +169,8 @@ module.exports = {
           }
         });
         photo = path.slice(2);
+      } else {
+        photo = userUpdate.photo;
       }
 
       const user = await Employees.updateOne(
