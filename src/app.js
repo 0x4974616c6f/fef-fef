@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 
 const { routerRecursosHumanos } = require("./router");
+const { routerFinanceiro } = require("./routes/financeiroRoutes");
 
 if (process.env.NODE_ENV !== "test") {
   mongoose.connect(process.env.DATABASE);
@@ -27,12 +28,13 @@ server.use(fileUpload());
 server.use(morgan("dev"));
 server.use(helmet());
 server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }))
+server.use(bodyParser.urlencoded({ extended: true }));
 server.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 // server.use(express.static(__dirname + "/public"));
 server.use("/public", express.static("public"));
 
 server.use("/", routerRecursosHumanos);
+server.use("/money", routerFinanceiro);
 
 module.exports = server;

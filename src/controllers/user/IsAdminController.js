@@ -9,7 +9,7 @@ module.exports = {
     }
 
     if (user.admin) {
-      return res.json(user);
+      return res.status(200).json(user);
     }
 
     return res.status(401).json({ error: "User not authorized" });
