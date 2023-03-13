@@ -4,7 +4,7 @@ class UpdateMoneyController {
   static async update(req, res) {
     try {
       const { id } = req.params;
-      const { amount, description, category } = req.body;
+      const { amount, description, category, status } = req.body;
 
       const money = await Money.findByIdAndUpdate(
         id,
